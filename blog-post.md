@@ -247,3 +247,54 @@ If you're following along with code, now might be a good time to create a commit
 > Before you commit make sure to add a .gitignore file  
 > `printf "node_modules\n.next" > .gitignore`
 
+![Working todo list screenshot](https://thepracticaldev.s3.amazonaws.com/i/x6cw0kj5jnaxmsq7oyrf.png)
+
+Let's now sync our todos with the cloud to be able to share them and collaborate with others.
+
+But first we need to understand Amplify GraphQL Transform. 
+
+> The GraphQL Transform provides a simple to use abstraction 
+> that helps you quickly create backends for your web and mobile applications on AWS.
+
+With it we define our data model using the GraphQL SDL and the amplify cli takes care of :
+
+1. Provisioning/Updating infrastructure for CRUDL operations.
+2. Generating code for client-side CRUDL-ing
+
+> CRUDL Create Read Update Delete List
+
+In our case the GraphQL schema is simple it consists of one todo type :
+```graphql
+type Todo @model {
+  # ! means non-null GraphQL fields are allowed to be null by default
+  id: ID!
+  name: String!
+  createdAt: Int!
+  completed: Boolean!
+}
+```
+
+> We store the schema as `schema.graphql` to be re-used later.
+
+The `@model` directive in the GraphQL Transform schema tells Amplify to treat the to do as a model and store objects of that type in DynamoDB and automatically configure CRUDL queries and mutations using AppSync.
+Read more about GraphQL Transform and supported directives [here](https://aws-amplify.github.io/docs/cli-toolchain/graphql)
+
+If you've already used Amplify you can skip directly to [Creating the API](#creating-the-api)
+
+## Setting up AWS Amplify
+
+  1. [Sign up](https://portal.aws.amazon.com/billing/signup#/start) for an AWS account
+  2. Install the AWS Amplify cli: 
+  ```sh
+npm install -g @aws-amplify/cli
+  ```
+  3. Configure the Amplify cli
+  ```sh
+amplify configure
+  ```
+[Read More](https://aws-amplify.github.io/docs/cli-toolchain/quickstart?sdk=js)
+
+
+## Creating the API
+
+We start by 
