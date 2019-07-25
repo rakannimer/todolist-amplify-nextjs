@@ -1,9 +1,9 @@
 ---
-title: Server-Side Rendered Realtime Web App with Next.js & AWS Amplify
+title: Server-Side Rendered Realtime Web App with Next.js, AWS Amplify & GraphQL
 
 published: false
 
-description: Going from an idea to an infinitely scale-able web app
+description: Going from an idea to an infinitely scale-able web app with Next.js & AWS Amplify
 
 tags: AWS, Amplify, Next.js, React, Javascript, Typescript
 
@@ -12,7 +12,7 @@ cover_image: https://thepracticaldev.s3.amazonaws.com/i/026cx817wn9ahvpnw4pb.png
 
 In this blog post we will go through building a server-rendered realtime collaborative todo list app with Next.js and AWS Amplify.
 
-You can check out the final code [here](https://github.com/rakannimer/todolist-amplify-nextjs)
+You can check out the final code [here](https://github.com/rakannimer/todolist-amplify-nextjs) and a demo [here](https://todolist-amplify-nextjs.rnim.now.sh).
 
 - [Introduction](#introduction)
 - [Creating our app skeleton](#creating-our-app-skeleton)
@@ -25,7 +25,7 @@ You can check out the final code [here](https://github.com/rakannimer/todolist-a
 - [Fetching initial todos on the server-side](#fetching-initial-todos-on-the-server-side)
 - [Listening to todos being added by others](#listening-to-todos-being-added-by-others)
 - [Listening to todos modified and deleted by others](#listening-to-todos-modified-and-deleted-by-others)
-- [Deploying our app](#deploying-our-app)
+- [Deploying our app with now](#deploying-our-app-with-now)
 
 ## Introduction
 
@@ -677,12 +677,40 @@ And last, we add a link to every todo item
 <a href={`/todo/${todo.id}`}>Visit</a>
 ```
 
-## Deploying our app
+## Deploying our app with now
 
-To deploy the app, we can either use [`export`](https://Next.js.org/learn/excel/static-html-export) from Next.js to export the app as a static website deploy-able anywhere or we can deploy it as a node server.
+There are 2 ways of deploying a Next.js app :
 
-And that's it we have built an SEO friendly server-side rendered collaborative todo list using Next.js and AWS Amplify.
+1. Export it to html and static assets and serve it from anywhere
+2. Run a node server that fetches the data on every request and serves pre-rendered pages
+
+We can't export our project to a static html app because we have a dynamic route `todo/[id]` that fetches data on the fly before rendering based on the url and our main route needs the latest todos to pre-render.
+
+Without these constraints, exporting would be as simple as running : `next build && next export`.
+
+The other way, which we will be using is to deploy it as we would any node server.
+
+The fastest way to deploy a Node.js server is using [now](https://zeit.co/now).
+
+We add a `now.json` file with the following contents :
+
+```json
+{
+  "version": 2,
+  "builds": [{ "src": "package.json", "use": "@now/next" }]
+}
+```
+
+> Read more about [`now.json`](https://zeit.co/docs/v2/advanced/configuration).
+
+And we can then deploy with
+
+```sh
+now
+```
+
+And that's it !
+
+We have built and deployed an SEO friendly server-side rendered collaborative todo list using Next.js and AWS Amplify.
 
 If you have any questions feel free to comment here or ping me on [twitter](https://twitter.com/rakannimer).
-
-If you enjoyed reading this
