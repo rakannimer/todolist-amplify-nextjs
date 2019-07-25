@@ -1,0 +1,4 @@
+{
+    "AppSyncApiName": "todolist",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST"
+}
