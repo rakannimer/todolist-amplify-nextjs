@@ -2,6 +2,7 @@ import * as React from "react";
 import nanoid from "nanoid";
 import { API, graphqlOperation } from "aws-amplify";
 import produce from "immer";
+import Link from "next/link";
 
 import config from "../src/aws-exports";
 import {
@@ -214,7 +215,9 @@ const App = ({ todos }: Props) => {
                 >
                   Delete
                 </button>
-                <a href={`/todo/${todo.id}`}>Visit</a>
+                <Link href={`/todo/[id]`} as={`/todo/${todo.id}`}>
+                  <a>Visit</a>
+                </Link>
               </li>
             );
           })}

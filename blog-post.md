@@ -1,16 +1,16 @@
 ---
-title: Server-Side Rendered Realtime Web App with Next.js, AWS Amplify & GraphQL
+title: Server-Side Rendered Real-time Web App with Next.js, AWS Amplify & GraphQL
 
 published: false
 
 description: Going from an idea to an infinitely scale-able web app with Next.js & AWS Amplify
 
-tags: AWS, Amplify, Next.js, React, Javascript, Typescript
+tags: AWS, Amplify, Next.js, React
 
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/026cx817wn9ahvpnw4pb.png
 ---
 
-In this blog post we will go through building a server-rendered realtime collaborative todo list app with Next.js and AWS Amplify.
+In this blog post we will go through building a server-rendered real-time collaborative todo list app with Next.js and AWS Amplify.
 
 You can check out the final code [here](https://github.com/rakannimer/todolist-amplify-nextjs) and a demo [here](https://todolist-amplify-nextjs.rnim.now.sh).
 
@@ -29,7 +29,7 @@ You can check out the final code [here](https://github.com/rakannimer/todolist-a
 
 ## Introduction
 
-The app will have dynamic and static routes to demonstrate how to load and render data from the server based on the incoming request url. And it has subscriptions to changes on the data to show how to use AWS Amplify to seamlessly listen to remote data.
+The app will have dynamic and static routes to demonstrate how to load and render data from the server based on the incoming request url. And it has subscriptions to changes on the data to show how to use AWS Amplify to seamlessly listen to remote data from the client.
 
 ![Amplify and Next.js](https://thepracticaldev.s3.amazonaws.com/i/026cx817wn9ahvpnw4pb.png)
 
@@ -320,7 +320,7 @@ The `@model` directive in the GraphQL Transform schema tells Amplify to treat th
 
 The `@connection` directive allows us to specify n-to-n relationships between our data types and sort it on the server-side.
 
-Read more about GraphQL Transform and supported directives [here](https://aws-amplify.github.io/docs/cli-toolchain/graphql)
+Read more about GraphQL Transform and supported directives [here](https://aws-amplify.github.io/docs/cli-toolchain/graphql).
 
 If you've already used Amplify you can skip directly to [Creating the API](#creating-the-api)
 
@@ -465,7 +465,7 @@ So we can't use the React.useEffect hook to load the data and store it in state.
 
 Using Next.js's `getInitialProps` async method we can fetch data from anywhere and pass it as props to our page component.
 
-So adding one to our main page would look like this
+Adding one to our main page would look like this
 
 ```typescript
 import { getTodoList, createTodoList } from "../src/graphql/queries";
@@ -508,7 +508,7 @@ App.getInitialProps = async () => {
 };
 ```
 
-And in our App component we initialize our state with the props we sent in `getInitialProps`
+And in our App component we initialize our state with the props we sent with `getInitialProps`
 
 ```typescript
 //<TypescriptOnly>
@@ -688,7 +688,7 @@ We can't export our project to a static html app because we have a dynamic route
 
 Without these constraints, exporting would be as simple as running : `next build && next export`.
 
-The other way, which we will be using is to deploy it as we would any node server.
+The other way, which we will be using, is to deploy it as we would any node server.
 
 The fastest way to deploy a Node.js server is using [now](https://zeit.co/now).
 
@@ -713,4 +713,4 @@ And that's it !
 
 We have built and deployed an SEO friendly server-side rendered collaborative todo list using Next.js and AWS Amplify.
 
-If you have any questions feel free to comment here or ping me on [twitter](https://twitter.com/rakannimer).
+👋 If you have any questions feel free to comment here or ping me on [twitter](https://twitter.com/rakannimer).
