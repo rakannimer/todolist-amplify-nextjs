@@ -31,6 +31,7 @@ type Observable<Value = unknown, Error = {}> = {
     completeCallback?: () => void
   ) => { unsubscribe: Function };
 };
+type Listener<T> = Observable<{ value: { data: T } }>;
 
 const MY_ID = nanoid();
 
@@ -91,7 +92,6 @@ const sendToServer = todo => {
   API.graphql(graphqlOperation(updateTodo, { input: todo }));
 };
 
-type Listener<T> = Observable<{ value: { data: T } }>;
 const App = ({ todos }: Props) => {
   const [state, dispatch] = React.useReducer(reducer, {
     currentTodo: "",
@@ -109,7 +109,7 @@ const App = ({ todos }: Props) => {
     );
 
     const onCreateSubscription = onCreateListener.subscribe(v => {
-      if (v.value.data.onCreateTodo.userId === MY_ID) return;
+      if (v.value.data.onCreateTodo["userId"] === MY_ID) return;
       dispatch({ type: "add", payload: v.value.data.onCreateTodo });
     });
     const onUpdateSubscription = onUpdateListener.subscribe(v => {
@@ -258,4 +258,5 @@ App.getInitialProps = async () => {
   }
   return { todos: [] };
 };
+
 export default App;

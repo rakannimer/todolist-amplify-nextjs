@@ -1,5 +1,5 @@
 projects:
-  todolist:
+  todolistwithamplify:
     schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.ts

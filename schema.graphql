@@ -5,6 +5,7 @@ type Todo @model {
   createdAt: String!
   completed: Boolean!
   todoList: TodoList! @connection(name: "SortedList")
+  userId: String!
 }
 
 type TodoList @model {
