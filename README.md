@@ -124,4 +124,4 @@ Two routes are implemented :
 
 - `/todo/[id]` : A dynamic route that uses getInitialProps and the id from the provided context to load a single todo from AppSync and render it on the server. (Code in [pages/todo/:[id].tsx](/pages/todo/[id].tsx))
 
-You can read more about it [here](https://dev.to/rakannimer/ssr-web-app-with-nextjs-aws-amplify-4olj).
+You can read more about it [here](https://dev.to/rakannimer/server-side-rendered-real-time-web-app-with-next-js-aws-amplify-graphql-2j49).
